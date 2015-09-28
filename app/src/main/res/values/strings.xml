@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Jlovas-reflex</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_gameshow_player_selection">GameshowPlayerSelection</string>
+    <string name="title_activity_four_players">FourPlayers</string>
+    <string name="title_activity_email_stats">EmailStats</string>
+    <string name="title_activity_reaction_info_popup">ReactionInfoPopup</string>
+    <string name="title_activity_reaction_timer">ReactionTimer</string>
+    <string name="title_activity_stats">Stats</string>
+    <string name="title_activity_three_players">ThreePlayers</string>
+    <string name="title_activity_two_players">TwoPlayers</string>
+    <string name="title_activity_too_soon">TooSoon</string>
+</resources>

@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Reaction Timer"
+        android:id="@+id/reactionTimerButton"
+        android:layout_above="@+id/gameshowBuzzerButton"
+        android:layout_alignParentStart="true"
+        android:background="#7174ff"
+        android:onClick="reactionTimerButton" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Gameshow Buzzer"
+        android:id="@+id/gameshowBuzzerButton"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:background="#3a40ff"
+        android:onClick="gameshowTimerButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Statistics"
+        android:id="@+id/statisticsButton"
+        android:layout_below="@+id/gameshowBuzzerButton"
+        android:layout_alignParentStart="true"
+        android:background="#0015b3"
+        android:onClick="statsButton"/>
+</RelativeLayout>

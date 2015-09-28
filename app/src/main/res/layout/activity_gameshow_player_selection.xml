@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.learning.jlovas.jlovas_reflex.GameshowPlayerSelection">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Two Players"
+        android:id="@+id/twoPlayerButton"
+        android:layout_above="@+id/threePlayerButton"
+        android:layout_alignParentStart="true"
+        android:onClick="twoPlayersButton"
+        android:background="#ffc0f3" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Three Players"
+        android:id="@+id/threePlayerButton"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:onClick="threePlayersButton"
+        android:background="#ff8fe2" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Four Players"
+        android:id="@+id/fourPlayerButton"
+        android:layout_below="@+id/threePlayerButton"
+        android:layout_alignParentStart="true"
+        android:onClick="fourPlayersButton"
+        android:background="#ff4ff1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose Number of Players:"
+        android:id="@+id/playerRequestText"
+        android:layout_above="@+id/twoPlayerButton"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+</RelativeLayout>
