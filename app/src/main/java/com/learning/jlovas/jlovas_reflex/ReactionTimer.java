@@ -1,5 +1,6 @@
 package com.learning.jlovas.jlovas_reflex;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
@@ -29,24 +30,13 @@ public class ReactionTimer extends ActionBarActivity {
 
         //grab current time - credit to Nicole Lovas for informing me of this function
         //consulting with Nicole Lovas over implementation
-        //double beginTime = (double) System.currentTimeMillis();
-
-        //once time is ready, change background to red
-        //while((System.currentTimeMillis()-beginTime) <= startRandom){
-        //end up here if tapping too soon
-
-        //}
-        //will reach here if the person does not tap too soon
-        //tooFast=true;
-        //background.setBackgroundColor(Color.RED);
-        //Toast.makeText(getApplicationContext(), "Random Time is: " + startRandom + " seconds", Toast.LENGTH_SHORT).show();
 
         //will create a random time to start
         long startRandom = (long) (Math.random() *(2001 - 10) + 10);
         ///////////////////////////////
         //ATTEMPT #2
         //CountDownTimer way
-        countDownTimer = new MyCountDownTimer(10000, 1000);
+        countDownTimer = new MyCountDownTimer(startRandom, 1000);
         background = (RelativeLayout) findViewById(R.id.bg);
 
         //start the countdown
@@ -57,17 +47,21 @@ public class ReactionTimer extends ActionBarActivity {
     } //end of onCreate
 
     //set up of the timer to my button
-    public void pushButton(View view) {
-        if(!tooFast){
+    public void pushedButton(View view) {
+        if(tooFast){
             //get here if going too fast
-            Toast.makeText(getApplicationContext(), "Got to !tooFast", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, TooSoon.class);
             startActivity(intent);
         }
         else{
             long time = System.currentTimeMillis();
-            long latency = countDownStarted - time;
+            long latency = time - countDownStarted;
             Toast.makeText(getApplicationContext(), "Latency is " + latency, Toast.LENGTH_SHORT).show();
+            //credit for restarting activity goes to:
+            //EboMike, http://stackoverflow.com/questions/1397361/how-do-i-restart-an-android-activity, Sept 28, 2015
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }
 
     }

@@ -15,6 +15,7 @@
         android:id="@+id/pushButton"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:onClick="pushedButton"/>
 
 </RelativeLayout>
