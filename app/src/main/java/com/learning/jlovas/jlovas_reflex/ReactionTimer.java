@@ -52,6 +52,8 @@ public class ReactionTimer extends ActionBarActivity {
             //get here if going too fast
             Intent intent = new Intent(this, TooSoon.class);
             startActivity(intent);
+            finish();
+
         }
         else{
             long time = System.currentTimeMillis();
