@@ -1,8 +1,24 @@
+/*      Jlovas-reflex: A buzzer game with different reaction functionalities.
+        Copyright (C) 2015  Jillian Lovas. jlovas@ualberta.ca
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 package com.learning.jlovas.jlovas_reflex;
 
-/**
- * Created by jlovas on 9/28/15.
- */
+
 public class ReactStatClass {
     private boolean tooFast;
     private long time;
@@ -35,14 +51,17 @@ public class ReactStatClass {
     }
 
     //calculates the latency, only for use within the class
-    private long calculateLatency(){
+    public void calculateLatency(){
         //do the calculation here!
-        return latency;
+        this.latency = this.time - this.countDownStarted;
     }
 
     //uses the private function to calculate latency and returns the value to the user
     public long getLatency() {
-        this.calculateLatency(); //THIS? or no this?
         return latency;
+    }
+
+    public void setTooFast(boolean b){
+        this.tooFast=b;
     }
 }

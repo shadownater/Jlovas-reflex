@@ -1,3 +1,21 @@
+/*      Jlovas-reflex: A buzzer game with different reaction functionalities.
+        Copyright (C) 2015  Jillian Lovas. jlovas@ualberta.ca
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 package com.learning.jlovas.jlovas_reflex;
 
 import android.app.Activity;
@@ -19,36 +37,35 @@ public class ReactionTimer extends ActionBarActivity {
     private CountDownTimer countDownTimer;
     public RelativeLayout background;
     public long countDownStarted;
+    ReactStatClass reactStat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaction_timer);
 
-        //credit for this goes to background changing link
-
-
         //grab current time - credit to Nicole Lovas for informing me of this function
-        //consulting with Nicole Lovas over implementation
+        //consulting with Nicole Lovas over implementation of random and use of countDownTimer
+        //Linda also mentioned using countDownTimer
+
+        //create object
+        reactStat = new ReactStatClass();
 
         //will create a random time to start
         long startRandom = (long) (Math.random() *(2001 - 10) + 10);
-        ///////////////////////////////
-        //ATTEMPT #2
-        //CountDownTimer way
+
         countDownTimer = new MyCountDownTimer(startRandom, 1000);
         background = (RelativeLayout) findViewById(R.id.bg);
 
         //start the countdown
         countDownTimer.start();
-        tooFast=true;
-        countDownStarted = (long)System.currentTimeMillis();
+        reactStat.setCountDownStarted((long)System.currentTimeMillis());
 
     } //end of onCreate
 
     //set up of the timer to my button
     public void pushedButton(View view) {
-        if(tooFast){
+        if(reactStat.isTooFast()){
             //get here if going too fast
             Intent intent = new Intent(this, TooSoon.class);
             startActivity(intent);
@@ -56,9 +73,10 @@ public class ReactionTimer extends ActionBarActivity {
 
         }
         else{
-            long time = System.currentTimeMillis();
-            long latency = time - countDownStarted;
-            Toast.makeText(getApplicationContext(), "Latency is " + latency, Toast.LENGTH_SHORT).show();
+            reactStat.setTime((long)System.currentTimeMillis());
+            reactStat.calculateLatency();
+            Toast.makeText(getApplicationContext(), "Latency is " + reactStat.getLatency(), Toast.LENGTH_SHORT).show();
+
             //credit for restarting activity goes to:
             //EboMike, http://stackoverflow.com/questions/1397361/how-do-i-restart-an-android-activity, Sept 28, 2015
             Intent intent = getIntent();
@@ -103,12 +121,12 @@ public class MyCountDownTimer extends CountDownTimer {
     public void onFinish() {
         //when random time is up I go here
         background.setBackgroundColor(Color.RED);
-        tooFast=false;
+        reactStat.setTooFast(false);
         }
 
     @Override
     public void onTick(long millisUntilFinished) {
-        //don't need this, not showing any time stuff
+        //don't need this, not showing any time stuff, but required to be here
         }
 
     }
