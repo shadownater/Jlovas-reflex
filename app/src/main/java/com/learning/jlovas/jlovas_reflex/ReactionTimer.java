@@ -13,6 +13,22 @@
 
         You should have received a copy of the GNU General Public License
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+        /////////////////////////////////////////////////////////////////////
+
+                Copyright 2008-2015 Google Inc., Jillian Lovas
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
 */
 
 
@@ -31,13 +47,22 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 public class ReactionTimer extends ActionBarActivity {
 
-    boolean tooFast;
     private CountDownTimer countDownTimer;
     public RelativeLayout background;
-    public long countDownStarted;
     ReactStatClass reactStat;
+    private static final String FILENAME = "reactionTimer.sav";
+    private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +100,11 @@ public class ReactionTimer extends ActionBarActivity {
         else{
             reactStat.setTime((long)System.currentTimeMillis());
             reactStat.calculateLatency();
-            Toast.makeText(getApplicationContext(), "Latency is " + reactStat.getLatency(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Latency is " + reactStat.getLatency() +" ms", Toast.LENGTH_SHORT).show();
+
+            //put into a saving place
+            reactStatArray.add(reactStat);
+            saveInFile();
 
             //credit for restarting activity goes to:
             //EboMike, http://stackoverflow.com/questions/1397361/how-do-i-restart-an-android-activity, Sept 28, 2015
@@ -85,6 +114,26 @@ public class ReactionTimer extends ActionBarActivity {
         }
 
     }
+    //credit for saveInFile
+    //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(reactStatArray, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,3 +182,7 @@ public class MyCountDownTimer extends CountDownTimer {
 
 
 }
+/*Portions of this page are reproduced from work created and shared by the
+  Android Open Source Project and used according to terms described in the
+  Creative Commons 2.5 Attribution License.
+ */

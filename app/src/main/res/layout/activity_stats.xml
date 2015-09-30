@@ -30,7 +30,8 @@
         android:id="@+id/clearStatsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp" />
+        android:layout_marginBottom="54dp"
+        android:onClick="clearStatsButton"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -45,8 +46,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/clearStatsButton"
-        android:id="@+id/scrollView"
-        android:layout_centerHorizontal="true" >
+        android:id="@+id/statsScrollView"
+        android:layout_centerHorizontal="true">
 
     </ScrollView>
 

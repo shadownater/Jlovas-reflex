@@ -13,6 +13,22 @@
 
         You should have received a copy of the GNU General Public License
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+        /////////////////////////////////////////////////////////////////////
+
+                Copyright 2008-2015 Google Inc., Jillian Lovas
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
 */
 
 
@@ -24,12 +40,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class Stats extends ActionBarActivity {
 
-    //grabbing the information back here
-    //Intent intent =getIntent();
-    //BuzzerStatsClass buzzerstats = (BuzzerStatsClass)intent.getParcelableExtra("playerOneStatsP2");
+    private static final String FILENAME = "reactionTimer.sav";
+    private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
+    public ScrollView myScrollView;
 
     //button linkage
     public void emailStatsButton(View view){
@@ -38,12 +66,44 @@ public class Stats extends ActionBarActivity {
 
     }
 
+    public void clearStatsButton(View view){
+        //add a way to clear the stats in here!
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        myScrollView = (ScrollView)findViewById(R.id.statsScrollView);
+        loadFromFile();
     }
+
+    //need to call onStart to update stats each visit to the activity!
+//////*********** ADD ONSTART!!
+
+    //credit for loadInFile:
+    //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<ReactStatClass>>() {}.getType();
+            reactStatArray = gson.fromJson(in, arraylistType );
+
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            reactStatArray = new ArrayList<ReactStatClass>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,3 +127,8 @@ public class Stats extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+/*Portions of this page are reproduced from work created and shared by the
+  Android Open Source Project and used according to terms described in the
+  Creative Commons 2.5 Attribution License.
+ */
