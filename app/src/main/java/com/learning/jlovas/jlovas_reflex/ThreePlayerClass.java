@@ -42,7 +42,7 @@ public class ThreePlayerClass extends MultiPlayerClass {
         super.increasePlayerThree();
     }
 
-    //write the clear later! :D
+
     public void clear(){
         super.clearPlayerOne();
         super.clearPlayerTwo();

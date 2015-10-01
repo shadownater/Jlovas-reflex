@@ -64,17 +64,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=" "
-        android:id="@+id/GameshowStatText"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/reactionStats"
-        android:layout_alignStart="@+id/clearStatsButton" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -83,7 +73,8 @@
         android:text="Reaction Timer:"
         android:id="@+id/indicatorText1"
         android:layout_below="@+id/statistics"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +83,8 @@
         android:text="Max"
         android:id="@+id/IndicatorTextMax"
         android:layout_below="@+id/indicatorText1"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,9 +92,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Gameshow Buzzer:"
         android:id="@+id/IndicatorText3"
-        android:layout_alignBottom="@+id/GameshowStatText"
+        android:textStyle="bold"
+        android:layout_below="@+id/reactionStats"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_marginTop="93dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,8 +103,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Two Player:"
         android:id="@+id/IndicatorTextTwoPlayer"
-        android:layout_alignTop="@+id/GameshowStatText"
-        android:layout_alignParentStart="true" />
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/IndicatorText3"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -119,19 +114,34 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Three Player:"
         android:id="@+id/IndicatorTextThreePlayer"
-        android:layout_below="@+id/GameshowStatText"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
+        android:textStyle="bold"
+
+        android:layout_below="@+id/twoPlayerStats"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=" "
-        android:id="@+id/textView2"
+        android:id="@+id/twoPlayerStats"
+        android:layout_below="@+id/IndicatorTextTwoPlayer"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/IndicatorTextThreePlayer"
-        android:layout_alignEnd="@+id/indicatorText1" />
+        android:textStyle="normal"
+
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" "
+        android:id="@+id/threePlayerStats"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        android:layout_below="@+id/IndicatorTextThreePlayer"
+        android:layout_alignParentStart="true" />
+
+
 
 </RelativeLayout>

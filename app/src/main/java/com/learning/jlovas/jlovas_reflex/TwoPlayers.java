@@ -61,9 +61,6 @@ public class TwoPlayers extends ActionBarActivity {
                 //move this Toast's placement to the right button/middle of the screen if you have time
                 Toast.makeText(getApplicationContext(), "Player One has " + buzzerstats.getPlayerOne() + " points!", Toast.LENGTH_SHORT).show();
                 saveInFile();
-
-
-                //finish();
                 break;
             case R.id.player2Button:
                 //display text that player2 touched button first
@@ -72,7 +69,6 @@ public class TwoPlayers extends ActionBarActivity {
 
                 Toast.makeText(getApplicationContext(), "Player Two has " + buzzerstats.getPlayerTwo() + " points!", Toast.LENGTH_SHORT).show();
                 saveInFile();
-                //finish();
                 break;
 
 
@@ -141,25 +137,5 @@ public class TwoPlayers extends ActionBarActivity {
         loadFromFile();
         }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_two_players, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -37,16 +37,11 @@ package com.learning.jlovas.jlovas_reflex;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -63,10 +58,13 @@ public class Stats extends ActionBarActivity {
 
     private static final String FILENAME1 = "reactionTimer.sav";
     private static final String FILENAME2 = "twoPlayers.sav";
+    private static final String FILENAME3 = "threePlayers.sav";
     private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
     public TextView myReactionStatsText;
     public TextView twoPlayerStatsText;
-    TwoPlayerClass buzzerStats = new TwoPlayerClass();
+    public TextView threePlayerStatsText;
+    TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
+    ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
 
     //button linkage
     public void emailStatsButton(View view){
@@ -77,11 +75,14 @@ public class Stats extends ActionBarActivity {
 
     public void clearStatsButton(View view){
         //add a way to clear the stats in here!
-        buzzerStats.clear();
+        buzzerStats2.clear();
+        buzzerStats3.clear();
         saveTwoPlayerInFile();
-
+        saveThreePlayerInFile();
         //update text
-        twoPlayerStatsText.setText("Player One: " + buzzerStats.getPlayerOne() + " Player Two: " + buzzerStats.getPlayerTwo());
+        twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
+        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
+
     }
 
     @Override
@@ -89,7 +90,8 @@ public class Stats extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         myReactionStatsText = (TextView)findViewById(R.id.reactionStats);
-        twoPlayerStatsText = (TextView)findViewById(R.id.GameshowStatText);
+        twoPlayerStatsText = (TextView)findViewById(R.id.twoPlayerStats);
+        threePlayerStatsText = (TextView)findViewById(R.id.threePlayerStats);
         //don't put loads in here! will only do it once!
     }
 
@@ -100,9 +102,11 @@ public class Stats extends ActionBarActivity {
         super.onStart();
         loadReactionStatsFromFile();
         loadTwoPlayerFromFile();
+        loadThreePlayerFromFile();
         //COME BACK TO ME AFTER TO DO THE MATH AND PASS PROPERLY
         myReactionStatsText.setText(reactStatArray + "");
-        twoPlayerStatsText.setText("Player One: " + buzzerStats.getPlayerOne() + " Player Two: " + buzzerStats.getPlayerTwo());
+        twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
+        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
         }
 
     //credit for loadInFile:
@@ -137,13 +141,35 @@ public class Stats extends ActionBarActivity {
             //credit for Gson:
             //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
             Type objectType = new TypeToken<TwoPlayerClass>() {}.getType();
-            buzzerStats = gson.fromJson(in, objectType );
+            buzzerStats2 = gson.fromJson(in, objectType );
             //have put the data into the reactStatArray
             //or we make a new one if no data to load
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            buzzerStats = new TwoPlayerClass();
+            buzzerStats2 = new TwoPlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadThreePlayerFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME3);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<ThreePlayerClass>() {}.getType();
+            buzzerStats3 = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerStats3 = new ThreePlayerClass();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException(e);
@@ -159,7 +185,7 @@ public class Stats extends ActionBarActivity {
             //making container for Gson object
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
-            gson.toJson(buzzerStats, out);
+            gson.toJson(buzzerStats2, out);
             out.flush(); //to print what we did
             fos.close();
         } catch (FileNotFoundException e) {
@@ -171,27 +197,24 @@ public class Stats extends ActionBarActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_stats, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private void saveThreePlayerInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME3, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(buzzerStats3, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
 }
 
 /*Portions of this page are reproduced from work created and shared by the

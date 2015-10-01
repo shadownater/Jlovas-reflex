@@ -1,7 +1,7 @@
 package com.learning.jlovas.jlovas_reflex;
 
 /**
- * Created by jlovas on 10/1/15.
+ * Consulted with Nicole and Linda over inheritence possibilities
  */
 public class MultiPlayerClass {
     private int playerOne;
