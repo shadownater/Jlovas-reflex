@@ -24,27 +24,30 @@
     tools:context="com.learning.jlovas.jlovas_reflex.ThreePlayers">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
         android:text="Player One"
-        android:id="@+id/button"
+        android:id="@+id/playerOne3pButton"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonPress3p"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
         android:text="Player Two"
-        android:id="@+id/button2"
+        android:id="@+id/playerTwo3pButton"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonPress3p"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
         android:text="Player Three"
-        android:id="@+id/button3"
+        android:id="@+id/playerThree3pButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonPress3p"/>
 
 </RelativeLayout>

@@ -71,3 +71,5 @@ UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
 Android Activity Lifecycle (for understanding the need for onStart()):
 Android Opensource Project (presented by Dr. Abram Hindle, CMPUT 301 Sept 2015)
 
+How to print variable with setText:
+Consulted with Nicole Lovas over the use of "" within the function to make it print. Sept 28th, 2015.

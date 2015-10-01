@@ -22,8 +22,59 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 public class ThreePlayers extends ActionBarActivity {
+
+    //My class objects
+    ThreePlayerClass buzzerstats = new ThreePlayerClass();
+
+    //listen for who clicks the button
+    //credit for using case switch id method:
+
+
+    public void buttonPress3p(View view){
+
+        switch(view.getId()) {
+            case R.id.playerOne3pButton:
+                //display text that player2 touched button first
+                //credit goes here for toast tutorial
+
+                //increase the points of the player
+                buzzerstats.increasePlayerOne();
+
+                Toast.makeText(getApplicationContext(), "Player One has " + buzzerstats.getPlayerOne() + " points!", Toast.LENGTH_SHORT).show();
+
+
+
+                //finish();
+                break;
+            case R.id.playerTwo3pButton:
+                //display text that player2 touched button first
+
+                buzzerstats.increasePlayerTwo();
+
+                Toast.makeText(getApplicationContext(), "Player Two has " + buzzerstats.getPlayerTwo() + " points!", Toast.LENGTH_SHORT).show();
+                //finish();
+                break;
+
+            case R.id.playerThree3pButton:
+                //display text that player2 touched button first
+
+                buzzerstats.increasePlayerThree();
+
+                Toast.makeText(getApplicationContext(), "Player Three has " + buzzerstats.getPlayerThree() + " points!", Toast.LENGTH_SHORT).show();
+                //finish();
+                break;
+
+
+        }
+
+
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

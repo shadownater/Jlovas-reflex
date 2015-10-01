@@ -42,14 +42,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="emailStatsButton"/>
 
-    <ScrollView
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/clearStatsButton"
-        android:id="@+id/statsScrollView"
-        android:layout_centerHorizontal="true">
-
-    </ScrollView>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" "
+        android:id="@+id/reactionStats"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        android:layout_below="@+id/IndicatorTextMax"
+        android:layout_alignStart="@+id/indicatorText1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,5 +63,75 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" "
+        android:id="@+id/GameshowStatText"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/reactionStats"
+        android:layout_alignStart="@+id/clearStatsButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Reaction Timer:"
+        android:id="@+id/indicatorText1"
+        android:layout_below="@+id/statistics"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Max"
+        android:id="@+id/IndicatorTextMax"
+        android:layout_below="@+id/indicatorText1"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Gameshow Buzzer:"
+        android:id="@+id/IndicatorText3"
+        android:layout_alignBottom="@+id/GameshowStatText"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Two Player:"
+        android:id="@+id/IndicatorTextTwoPlayer"
+        android:layout_alignTop="@+id/GameshowStatText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Three Player:"
+        android:id="@+id/IndicatorTextThreePlayer"
+        android:layout_below="@+id/GameshowStatText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" "
+        android:id="@+id/textView2"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/IndicatorTextThreePlayer"
+        android:layout_alignEnd="@+id/indicatorText1" />
 
 </RelativeLayout>

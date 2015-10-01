@@ -18,7 +18,6 @@
 
 package com.learning.jlovas.jlovas_reflex;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,11 +25,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class TwoPlayers extends ActionBarActivity {
 
     //My class objects
-    BuzzerStatsClass buzzerstats = new BuzzerStatsClass();
-
+    TwoPlayerClass buzzerstats = new TwoPlayerClass();
+    private static final String FILENAME = "twoPlayers.sav";
     //listen for who clicks the button
     //credit for using case switch id method:
 
@@ -43,22 +56,23 @@ public class TwoPlayers extends ActionBarActivity {
                 //credit goes here for toast tutorial
 
                 //increase the points of the player
-                buzzerstats.increaseTwoPlayer1p();
+                buzzerstats.increasePlayerOne();
 
-                Toast.makeText(getApplicationContext(), "Player One has " + buzzerstats.getTwoPlayer1p() + " points!", Toast.LENGTH_SHORT).show();
+                //move this Toast's placement to the right button/middle of the screen if you have time
+                Toast.makeText(getApplicationContext(), "Player One has " + buzzerstats.getPlayerOne() + " points!", Toast.LENGTH_SHORT).show();
+                saveInFile();
 
-                Intent intent = new Intent();
-                intent.putExtra("playerOneStatsP2", buzzerstats);
 
-                finish();
+                //finish();
                 break;
             case R.id.player2Button:
                 //display text that player2 touched button first
 
-                buzzerstats.increaseTwoPlayer2p();
+                buzzerstats.increasePlayerTwo();
 
-                Toast.makeText(getApplicationContext(), "Player Two has " + buzzerstats.getTwoPlayer2p() + " points!", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(getApplicationContext(), "Player Two has " + buzzerstats.getPlayerTwo() + " points!", Toast.LENGTH_SHORT).show();
+                saveInFile();
+                //finish();
                 break;
 
 
@@ -67,11 +81,65 @@ public class TwoPlayers extends ActionBarActivity {
 
     }
 
+
+    //credit for saveInFile and loadFromFile
+    //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(buzzerstats, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<TwoPlayerClass>() {}.getType();
+            buzzerstats = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerstats = new TwoPlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_players);
     }
+
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        //PLEASE NOTE: I have made the assumption that players would like to
+        //return to the score in which they had left off.
+        //load the previous game to continue playing when you come back
+        loadFromFile();
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
