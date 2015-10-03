@@ -1,5 +1,7 @@
 package com.learning.jlovas.jlovas_reflex;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
@@ -124,7 +126,50 @@ public class CalculatorClass{
         }
     }
 
-    ////////////WRITE calMedAll HERE!!!!
+    //calculates the median of all latencies in the array
+    public void calcMedAll(ArrayList<ReactStatClass> array){
+        //consulted with Nicole Lovas on how to potentially calculate the median when
+        //the list is unsorted. Utilizing knowledge from previous college, GPRC,
+        //to use the sort method in Array.
+        if(!array.isEmpty()) {
+            long[] secondArray = new long[array.size()];
+
+            //copy latencies into this array
+            int i = 0;
+            while (i != array.size()) {
+                //move the latencies into the array
+                secondArray[i] = array.get(i).getLatency();
+                i++;
+            } //end of while
+
+            //now that all latencies are in the new array, we can call sort on it
+            Arrays.sort(secondArray);
+
+                //now have to grab median. Depends on even or odd # of things
+                if (array.size() % 2 == 1) {
+                    //get in here if odd number of things. Easier to deal with
+                    int middle = array.size() / 2;
+
+                    medAll = secondArray[middle];
+
+                } else {
+                    if (array.size() % 2 == 0) {
+                        //if in here, it is even, so grab two center numbers and avg them
+                        int middle1 = array.size() / 2;
+                        int middle2 = middle1 - 1;
+
+                        medAll = (secondArray[middle1] + secondArray[middle2]) / 2;
+
+                    }
+                }//end of else
+
+        }// here if array is empty
+        else{
+            medAll=0;
+        }
+
+
+    }
 
 
     //calculates the max of the last 10 reactions
@@ -203,7 +248,38 @@ public class CalculatorClass{
         }
     }
 
-    //////////ADD calcMedTen HERE!!!!
+    //calculates the med of the last 10 entries
+    public void calcMedTen(ArrayList<ReactStatClass> array){
+        if(!array.isEmpty()) {
+            if (array.size() >= 10) {
+                long[] secondArray = new long[10];
+
+                //copy last ten latencies into this array
+                int counter = 10;
+                int i=0;
+                while (counter > 0) {
+                    //move the latencies into the array
+                    secondArray[i] = array.get(array.size()-counter).getLatency();
+                    i++;
+                    counter--;
+                } //end of while
+
+                //now that all latencies are in the new array, we can call sort on it
+                Arrays.sort(secondArray);
+
+                //in here will always be 10 so even, don't worry about odd calculation
+                medTen = (secondArray[4] + secondArray[5]) / 2;
+
+            }else { //here if less than 10 items
+                //therefore it's the same as medAll
+                medTen = medAll;
+            }
+        }// here if array is empty
+        else{
+            medTen=0;
+        }
+
+    }
 
     //calculates the max of the last 100 entries
     public void calcMaxHun(ArrayList<ReactStatClass> array){
@@ -276,6 +352,40 @@ public class CalculatorClass{
             avgHun=0;
         }
     }
+
+    //calculates the med of the last 100 entries
+    public void calcMedHun(ArrayList<ReactStatClass> array){
+        if(!array.isEmpty()) {
+            if (array.size() >= 100) {
+                long[] secondArray = new long[100];
+
+                //copy last ten latencies into this array
+                int counter = 100;
+                int i=0;
+                while (counter > 0) {
+                    //move the latencies into the array
+                    secondArray[i] = array.get(array.size()-counter).getLatency();
+                    i++;
+                    counter--;
+                } //end of while
+
+                //now that all latencies are in the new array, we can call sort on it
+                Arrays.sort(secondArray);
+
+                //in here will always be 10 so even, don't worry about odd calculation
+                medTen = (secondArray[49] + secondArray[50]) / 2;
+
+            }else { //here if less than 10 items
+                //therefore it's the same as medAll
+                medHun = medAll;
+            }
+        }// here if array is empty
+        else{
+            medHun=0;
+        }
+
+    }
+
 
     //getters down below
 

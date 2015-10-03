@@ -177,7 +177,7 @@
         android:id="@+id/indicatorTextAll"
         android:textStyle="bold"
         android:layout_below="@+id/indicatorText1"
-        android:layout_alignStart="@+id/maxAllText" />
+        android:layout_alignStart="@+id/IndicatorText3" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -208,7 +208,8 @@
         android:text=" "
         android:id="@+id/maxAllText"
         android:layout_alignTop="@+id/maxTenText"
-        android:layout_alignEnd="@+id/IndicatorTextTwoPlayer" />
+        android:layout_alignStart="@+id/indicatorText1"
+        android:layout_marginStart="-20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -218,7 +219,7 @@
         android:id="@+id/maxTenText"
         android:layout_below="@+id/indicatorTextAll"
         android:layout_alignEnd="@+id/statistics"
-        android:layout_marginEnd="50dp" />
+        android:layout_marginEnd="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -228,7 +229,7 @@
         android:id="@+id/maxHunText"
         android:layout_above="@+id/indicatorTextMin"
         android:layout_toEndOf="@+id/IndicatorText3"
-        android:layout_marginStart="19dp" />
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -237,7 +238,8 @@
         android:text=" "
         android:id="@+id/minAllText"
         android:layout_alignTop="@+id/indicatorTextMin"
-        android:layout_alignEnd="@+id/IndicatorTextTwoPlayer" />
+        android:layout_alignStart="@+id/indicatorText1"
+        android:layout_marginStart="-20dp"/>
 
     <TextView
         android:layout_width="wrap_content"

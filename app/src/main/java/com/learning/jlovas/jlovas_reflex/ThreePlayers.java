@@ -40,7 +40,7 @@ import java.lang.reflect.Type;
 
 public class ThreePlayers extends ActionBarActivity {
 
-    //My class objects
+    //My class object
     ThreePlayerClass buzzerstats = new ThreePlayerClass();
     private static final String FILENAME = "threePlayers.sav";
 
@@ -52,7 +52,7 @@ public class ThreePlayers extends ActionBarActivity {
 
         switch(view.getId()) {
             case R.id.playerOne3pButton:
-                //display text that player2 touched button first
+                //display text that player1 touched button first
                 //credit goes here for toast tutorial
 
                 //increase the points of the player
@@ -70,7 +70,7 @@ public class ThreePlayers extends ActionBarActivity {
                 break;
 
             case R.id.playerThree3pButton:
-                //display text that player2 touched button first
+                //display text that player3 touched button first
 
                 buzzerstats.increasePlayerThree();
                 Toast.makeText(getApplicationContext(), "Player Three has " + buzzerstats.getPlayerThree() + " points!", Toast.LENGTH_SHORT).show();

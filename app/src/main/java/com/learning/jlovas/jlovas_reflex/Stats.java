@@ -43,6 +43,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -59,6 +61,7 @@ public class Stats extends ActionBarActivity {
     private static final String FILENAME1 = "reactionTimer.sav";
     private static final String FILENAME2 = "twoPlayers.sav";
     private static final String FILENAME3 = "threePlayers.sav";
+    private static final String FILENAME4 = "fourPlayers.sav";
     private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
     private CalculatorClass calc;
 
@@ -74,12 +77,17 @@ public class Stats extends ActionBarActivity {
     public TextView myAvgTenText;
     public TextView myAvgHunText;
 
+    public TextView myMedAllText;
+    public TextView myMedTenText;
+    public TextView myMedHunText;
+
     public TextView twoPlayerStatsText;
     public TextView threePlayerStatsText;
     public TextView fourPlayerStatsText;
 
     TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
     ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
+    FourPlayerClass buzzerStats4 = new FourPlayerClass();
 
     //email stats button function
     public void emailStatsButton(View view){
@@ -92,27 +100,33 @@ public class Stats extends ActionBarActivity {
         //add a way to clear the stats in here!
         buzzerStats2.clear();
         buzzerStats3.clear();
+        buzzerStats4.clear();
         calc.clear(reactStatArray);
         saveReactionStatsInFile();
         saveTwoPlayerInFile();
         saveThreePlayerInFile();
+        saveFourPlayerInFile();
         //update text
 
-        myMaxAllText.setText(calc.getMaxAll()+"");
-        myMaxTenText.setText(calc.getMaxTen()+"");
-        myMaxHunText.setText(calc.getMaxHun()+"");
+        myMaxAllText.setText(calc.getMaxAll()+"ms");
+        myMaxTenText.setText(calc.getMaxTen()+"ms");
+        myMaxHunText.setText(calc.getMaxHun()+"ms");
 
-        myMinAllText.setText(calc.getMinAll()+"");
-        myMinTenText.setText(calc.getMinTen()+"");
-        myMinHunText.setText(calc.getMinHun()+"");
+        myMinAllText.setText(calc.getMinAll()+"ms");
+        myMinTenText.setText(calc.getMinTen()+"ms");
+        myMinHunText.setText(calc.getMinHun()+"ms");
 
-        myAvgAllText.setText(calc.getAvgAll()+"");
-        myAvgTenText.setText(calc.getAvgTen()+"");
-        myAvgHunText.setText(calc.getAvgHun()+"");
+        myAvgAllText.setText(calc.getAvgAll()+"ms");
+        myAvgTenText.setText(calc.getAvgTen()+"ms");
+        myAvgHunText.setText(calc.getAvgHun()+"ms");
+
+        myMedAllText.setText(calc.getMedAll()+"ms");
+        myMedTenText.setText(calc.getMedTen()+"ms");
+        myMedHunText.setText(calc.getMedHun()+"ms");
 
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
         threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
-
+        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: " + buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
     }
 
     @Override
@@ -132,8 +146,13 @@ public class Stats extends ActionBarActivity {
         myAvgTenText = (TextView)findViewById(R.id.avgTenText);
         myAvgHunText = (TextView)findViewById(R.id.avgHunText);
 
+        myMedAllText = (TextView)findViewById(R.id.medAllText);
+        myMedTenText = (TextView)findViewById(R.id.medTenText);
+        myMedHunText = (TextView)findViewById(R.id.medHunText);
+
         twoPlayerStatsText = (TextView)findViewById(R.id.twoPlayerStats);
         threePlayerStatsText = (TextView)findViewById(R.id.threePlayerStats);
+        fourPlayerStatsText = (TextView)findViewById(R.id.fourPlayerStats);
 
         calc = new CalculatorClass();
         //don't put loads in here! will only do it once!
@@ -157,24 +176,35 @@ public class Stats extends ActionBarActivity {
         calc.calcAvgTen(reactStatArray);
         calc.calcAvgHun(reactStatArray);
 
+        calc.calcMedAll(reactStatArray);
+        calc.calcMedTen(reactStatArray);
+        calc.calcMedHun(reactStatArray);
+
         loadTwoPlayerFromFile();
         loadThreePlayerFromFile();
+        loadFourPlayerFromFile();
 
-        myMaxAllText.setText(calc.getMaxAll()+"");
-        myMaxTenText.setText(calc.getMaxTen()+"");
-        myMaxHunText.setText(calc.getMaxHun()+"");
+        myMaxAllText.setText(calc.getMaxAll()+"ms");
+        myMaxTenText.setText(calc.getMaxTen()+"ms");
+        myMaxHunText.setText(calc.getMaxHun()+"ms");
 
-        myMinAllText.setText(calc.getMinAll()+"");
-        myMinTenText.setText(calc.getMinTen()+"");
-        myMinHunText.setText(calc.getMinHun()+"");
+        myMinAllText.setText(calc.getMinAll()+"ms");
+        myMinTenText.setText(calc.getMinTen()+"ms");
+        myMinHunText.setText(calc.getMinHun()+"ms");
 
-        myAvgAllText.setText(calc.getAvgAll()+"");
-        myAvgTenText.setText(calc.getAvgTen()+"");
-        myAvgHunText.setText(calc.getAvgHun()+"");
+        myAvgAllText.setText(calc.getAvgAll()+"ms");
+        myAvgTenText.setText(calc.getAvgTen()+"ms");
+        myAvgHunText.setText(calc.getAvgHun()+"ms");
+
+        myMedAllText.setText(calc.getMedAll()+"ms");
+        myMedTenText.setText(calc.getMedTen()+"ms");
+        myMedHunText.setText(calc.getMedHun()+"ms");
 
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
         threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
-        }
+        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: " + buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
+
+    }
 
     //credit for loadInFile:
     //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
@@ -244,6 +274,28 @@ public class Stats extends ActionBarActivity {
 
     }
 
+    private void loadFourPlayerFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME4);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<FourPlayerClass>() {}.getType();
+            buzzerStats4 = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerStats4 = new FourPlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
     //credit for saveInFile and loadFromFile
     //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
     private void saveTwoPlayerInFile() {
@@ -271,6 +323,24 @@ public class Stats extends ActionBarActivity {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(buzzerStats3, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveFourPlayerInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME4, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(buzzerStats4, out);
             out.flush(); //to print what we did
             fos.close();
         } catch (FileNotFoundException e) {
