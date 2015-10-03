@@ -60,26 +60,56 @@ public class Stats extends ActionBarActivity {
     private static final String FILENAME2 = "twoPlayers.sav";
     private static final String FILENAME3 = "threePlayers.sav";
     private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
-    public TextView myReactionStatsText;
+    private CalculatorClass calc;
+
+    public TextView myMaxAllText;
+    public TextView myMaxTenText;
+    public TextView myMaxHunText;
+
+    public TextView myMinAllText;
+    public TextView myMinTenText;
+    public TextView myMinHunText;
+
+    public TextView myAvgAllText;
+    public TextView myAvgTenText;
+    public TextView myAvgHunText;
+
     public TextView twoPlayerStatsText;
     public TextView threePlayerStatsText;
+    public TextView fourPlayerStatsText;
+
     TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
     ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
 
-    //button linkage
+    //email stats button function
     public void emailStatsButton(View view){
         Intent intent = new Intent(Stats.this, EmailStats.class);
         startActivity(intent);
 
     }
-
+    //clear stats button function
     public void clearStatsButton(View view){
         //add a way to clear the stats in here!
         buzzerStats2.clear();
         buzzerStats3.clear();
+        calc.clear(reactStatArray);
+        saveReactionStatsInFile();
         saveTwoPlayerInFile();
         saveThreePlayerInFile();
         //update text
+
+        myMaxAllText.setText(calc.getMaxAll()+"");
+        myMaxTenText.setText(calc.getMaxTen()+"");
+        myMaxHunText.setText(calc.getMaxHun()+"");
+
+        myMinAllText.setText(calc.getMinAll()+"");
+        myMinTenText.setText(calc.getMinTen()+"");
+        myMinHunText.setText(calc.getMinHun()+"");
+
+        myAvgAllText.setText(calc.getAvgAll()+"");
+        myAvgTenText.setText(calc.getAvgTen()+"");
+        myAvgHunText.setText(calc.getAvgHun()+"");
+
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
         threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
 
@@ -89,9 +119,23 @@ public class Stats extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        myReactionStatsText = (TextView)findViewById(R.id.reactionStats);
+        //initialize all my textviews to their places to print
+        myMaxAllText = (TextView)findViewById(R.id.maxAllText);
+        myMaxTenText = (TextView)findViewById(R.id.maxTenText);
+        myMaxHunText = (TextView)findViewById(R.id.maxHunText);
+
+        myMinAllText = (TextView)findViewById(R.id.minAllText);
+        myMinTenText = (TextView)findViewById(R.id.minTenText);
+        myMinHunText = (TextView)findViewById(R.id.minHunText);
+
+        myAvgAllText = (TextView)findViewById(R.id.avgAllText);
+        myAvgTenText = (TextView)findViewById(R.id.avgTenText);
+        myAvgHunText = (TextView)findViewById(R.id.avgHunText);
+
         twoPlayerStatsText = (TextView)findViewById(R.id.twoPlayerStats);
         threePlayerStatsText = (TextView)findViewById(R.id.threePlayerStats);
+
+        calc = new CalculatorClass();
         //don't put loads in here! will only do it once!
     }
 
@@ -101,10 +145,33 @@ public class Stats extends ActionBarActivity {
         // TODO Auto-generated method stub
         super.onStart();
         loadReactionStatsFromFile();
+        calc.calcMaxAll(reactStatArray);
+        calc.calcMaxTen(reactStatArray);
+        calc.calcMaxHun(reactStatArray);
+
+        calc.calcMinAll(reactStatArray);
+        calc.calcMinTen(reactStatArray);
+        calc.calcMinHun(reactStatArray);
+
+        calc.calcAvgAll(reactStatArray);
+        calc.calcAvgTen(reactStatArray);
+        calc.calcAvgHun(reactStatArray);
+
         loadTwoPlayerFromFile();
         loadThreePlayerFromFile();
-        //COME BACK TO ME AFTER TO DO THE MATH AND PASS PROPERLY
-        myReactionStatsText.setText(reactStatArray + "");
+
+        myMaxAllText.setText(calc.getMaxAll()+"");
+        myMaxTenText.setText(calc.getMaxTen()+"");
+        myMaxHunText.setText(calc.getMaxHun()+"");
+
+        myMinAllText.setText(calc.getMinAll()+"");
+        myMinTenText.setText(calc.getMinTen()+"");
+        myMinHunText.setText(calc.getMinHun()+"");
+
+        myAvgAllText.setText(calc.getAvgAll()+"");
+        myAvgTenText.setText(calc.getAvgTen()+"");
+        myAvgHunText.setText(calc.getAvgHun()+"");
+
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
         threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
         }
@@ -204,6 +271,24 @@ public class Stats extends ActionBarActivity {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(buzzerStats3, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveReactionStatsInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME1, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(reactStatArray, out);
             out.flush(); //to print what we did
             fos.close();
         } catch (FileNotFoundException e) {

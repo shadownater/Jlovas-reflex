@@ -48,12 +48,17 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ReactionTimer extends ActionBarActivity {
@@ -98,11 +103,14 @@ public class ReactionTimer extends ActionBarActivity {
 
         }
         else{
+            //get here if the tap was ok, record the latency in an object and put into an array
             reactStat.setTime((long)System.currentTimeMillis());
             reactStat.calculateLatency();
             Toast.makeText(getApplicationContext(), "Latency is " + reactStat.getLatency() +" ms", Toast.LENGTH_SHORT).show();
 
             //put into a saving place
+            //FIRST: load a previous array so I'm not making a new one each time
+            loadFromFile();
             reactStatArray.add(reactStat);
             saveInFile();
 
@@ -135,7 +143,27 @@ public class ReactionTimer extends ActionBarActivity {
     }
 
 
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type arraylistType = new TypeToken<ArrayList<ReactStatClass>>() {}.getType();
+            reactStatArray = gson.fromJson(in, arraylistType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
 
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            reactStatArray = new ArrayList<ReactStatClass>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
 //credit for CountDownTimer goes to:
