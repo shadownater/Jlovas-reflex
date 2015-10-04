@@ -33,7 +33,7 @@ limitations under the License.
 
 /////////////////////////////////////////////////////////////////////
 
->>Video of the app in action:<<
+Video of the app in action:
 https://youtu.be/KKyxQbidDcQ
 
  
@@ -104,3 +104,10 @@ UML Representation of an overloaded methods:
 StackOverFlow
 Vincent Ramdhanie, http://stackoverflow.com/questions/329686/representing-overloaded-methods-in-uml, Oct 1, 2015
 http://stackoverflow.com/users/27439/vincent-ramdhanie
+
+Setting up the APK and installing:
+CMPUT 301 Forums post by Ian Watts, accessed Oct 4,2015
+Source: StackOverFlow
+Elenasys, http://stackoverflow.com/questions/3480201/how-do-you-install-an-apk-file-in-the-android-emulator/3480235#3480235, Oct 4, 2015
+http://stackoverflow.com/users/250260/elenasys
+Maitho, http://androidthon.info/how-to-install-apk-file-on-android-emulator/, Oct 4, 2015
