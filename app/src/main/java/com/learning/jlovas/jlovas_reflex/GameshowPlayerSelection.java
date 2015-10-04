@@ -27,8 +27,10 @@ import android.view.View;
 
 public class GameshowPlayerSelection extends ActionBarActivity {
 
-    //button stuffs
+    //button stuff
     //buttons from 2-4 players needing activity function calls
+
+
     public void twoPlayersButton(View view){
         Intent intent = new Intent(GameshowPlayerSelection.this, TwoPlayers.class);
         startActivity(intent);

@@ -1,12 +1,30 @@
+/*      Jlovas-reflex: A buzzer game with different reaction functionalities.
+        Copyright (C) 2015  Jillian Lovas. jlovas@ualberta.ca
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.learning.jlovas.jlovas_reflex;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
- * Plan for use: array will be popped out of Gson in stats
- * -> after that, the array will be passed to this and math will be done and stored in the instance of the class (?)
+ * Use the CalculatorClass to calculate the appropriate stats for each required statistic
+ * on the stats page. An arrayList of the collected objects from the reactionTimer
+ * is passed in and various calculations can be done on the data inside them.
+ * This is only for the reaction timer.
  */
 public class CalculatorClass{
     private long maxAll;
@@ -63,6 +81,9 @@ public class CalculatorClass{
         medHun=0;
 
     }
+
+    //consulted with Nicole Lovas over the implementation of some of these methods. Oct 2-3, 2015
+
 
     //calculates the max of all latencies in the array
     public void calcMaxAll(ArrayList<ReactStatClass> array){
@@ -131,6 +152,10 @@ public class CalculatorClass{
         //consulted with Nicole Lovas on how to potentially calculate the median when
         //the list is unsorted. Utilizing knowledge from previous college, GPRC,
         //to use the sort method in Array.
+
+        //Remembering how to use the Arrays:
+        //Armando Flores, http://examples.javacodegeeks.com/core-java/util/arrays/java-util-arrays-example/, Oct 3,2015
+
         if(!array.isEmpty()) {
             long[] secondArray = new long[array.size()];
 
@@ -437,8 +462,5 @@ public class CalculatorClass{
         return medHun;
     }
 
-
-    //HERE look at how they pull it out into an arraylist here:
-    //https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html
 
 }

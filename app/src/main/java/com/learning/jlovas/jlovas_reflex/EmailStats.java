@@ -13,6 +13,22 @@
 
         You should have received a copy of the GNU General Public License
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+        /////////////////////////////////////////////////////////////////////
+
+                Copyright 2008-2015 Google Inc., Jillian Lovas
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
 */
 
 
@@ -21,25 +37,18 @@ package com.learning.jlovas.jlovas_reflex;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class EmailStats extends ActionBarActivity {
 
@@ -47,11 +56,13 @@ public class EmailStats extends ActionBarActivity {
     String []myEmail;
     String subject = new String("Your Buzzer statistics");
 
+    //files to load from
     private static final String FILENAME = "calculatedStats.sav";
     private static final String FILENAME2 = "twoPlayers.sav";
     private static final String FILENAME3 = "threePlayers.sav";
     private static final String FILENAME4 = "fourPlayers.sav";
 
+    //objects to copy my data for the files
     TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
     ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
     FourPlayerClass buzzerStats4 = new FourPlayerClass();
@@ -63,6 +74,7 @@ public class EmailStats extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_stats);
 
+        //declare UI goodies
         enteredEmail = (EditText)findViewById(R.id.emailText);
         calc = new CalculatorClass();
         buzzerStats2 = new TwoPlayerClass();
@@ -107,7 +119,7 @@ public class EmailStats extends ActionBarActivity {
 
     }
 
-    //credit for loadInFile:
+    //credit for loadInFiles/saveInFiles:
     //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
     private void loadCalculatorFromFile() {
         try {
@@ -198,3 +210,7 @@ public class EmailStats extends ActionBarActivity {
     }
 
 }
+/*Portions of this page are reproduced from work created and shared by the
+  Android Open Source Project and used according to terms described in the
+  Creative Commons 2.5 Attribution License.
+ */

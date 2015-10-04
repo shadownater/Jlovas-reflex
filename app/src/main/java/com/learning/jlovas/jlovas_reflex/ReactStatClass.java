@@ -16,6 +16,11 @@
 
 */
 
+/*
+* This class is used to calculate the latency of a single object.
+* Each of these objects is then stored in an array (not done here)
+* to be used for calculating the data for the statistics.
+ */
 
 package com.learning.jlovas.jlovas_reflex;
 
@@ -61,7 +66,7 @@ public class ReactStatClass {
     public long getLatency() {
         return latency;
     }
-
+    //sets the tooFast to passed value true/false
     public void setTooFast(boolean b){
         this.tooFast=b;
     }

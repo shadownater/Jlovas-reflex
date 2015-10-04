@@ -15,7 +15,10 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
+/*
+* This class is for counting the score within the two player multiplayer game.
+*
+ */
 package com.learning.jlovas.jlovas_reflex;
 
 import android.os.Parcel;
@@ -24,34 +27,33 @@ import android.os.Parcelable;
 
 public class TwoPlayerClass extends MultiPlayerClass{
 
-    //private int twoPlayer1p;
-    //private int twoPlayer2p;
-
-
-    public TwoPlayerClass() {
+    //constructor-set scores to 0 to start
+     public TwoPlayerClass() {
         super();
 
     }
-
+    //returns player one score
     public int getPlayerOne() {
         int gotp1 = super.getPlayerOne();
         return gotp1;
 
     }
+    //returns player two score
     public int getPlayerTwo(){
         int gotp2 = super.getPlayerTwo();
         return gotp2;
 
     }
-
+    //increases the score of p1
     public void increasePlayerOne(){
         super.increasePlayerOne();
     }
+    //increases the score of p2
     public void increasePlayerTwo(){
         super.increasePlayerTwo();
     }
 
-    //write the clear later! :D
+    //clears the score of both players to 0
     public void clear(){
         super.clearPlayerOne();
         super.clearPlayerTwo();

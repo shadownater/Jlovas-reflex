@@ -13,6 +13,21 @@
 
         You should have received a copy of the GNU General Public License
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /////////////////////////////////////////////////////////////////////
+
+                Copyright 2008-2015 Google Inc., Jillian Lovas
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
 */
 
 
@@ -46,14 +61,16 @@ public class TwoPlayers extends ActionBarActivity {
     private static final String FILENAME = "twoPlayers.sav";
     //listen for who clicks the button
     //credit for using case switch id method:
-
+    //StackOverFlow
+    //Vitali Olshevski, http://stackoverflow.com/questions/13032333/droid-how-to-get-button-id-from-onclick-method-described-in-xml, Sept 27 2015
+    //http://stackoverflow.com/users/274517/vitali-olshevski
 
     public void buttonPress(View view){
 
         switch(view.getId()) {
             case R.id.player1Button:
                 //display text that player2 touched button first
-                //credit goes here for toast tutorial
+
 
                 //increase the points of the player
                 buzzerstats.increasePlayerOne();
@@ -139,3 +156,7 @@ public class TwoPlayers extends ActionBarActivity {
 
 
 }
+/*Portions of this page are reproduced from work created and shared by the
+  Android Open Source Project and used according to terms described in the
+  Creative Commons 2.5 Attribution License.
+ */

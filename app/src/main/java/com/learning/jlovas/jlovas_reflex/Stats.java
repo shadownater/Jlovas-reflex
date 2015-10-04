@@ -58,14 +58,18 @@ import java.util.ArrayList;
 
 public class Stats extends ActionBarActivity {
 
+    //my fiels to open/close
     private static final String FILENAME1 = "reactionTimer.sav";
     private static final String FILENAME2 = "twoPlayers.sav";
     private static final String FILENAME3 = "threePlayers.sav";
     private static final String FILENAME4 = "fourPlayers.sav";
     private static final String FILENAME5 = "calculatedStats.sav";
+
+    //objects
     private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
     private CalculatorClass calc;
 
+    //various UI variables
     public TextView myMaxAllText;
     public TextView myMaxTenText;
     public TextView myMaxHunText;
@@ -86,6 +90,7 @@ public class Stats extends ActionBarActivity {
     public TextView threePlayerStatsText;
     public TextView fourPlayerStatsText;
 
+    //multiplayer objects
     TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
     ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
     FourPlayerClass buzzerStats4 = new FourPlayerClass();
@@ -129,8 +134,10 @@ public class Stats extends ActionBarActivity {
         myMedHunText.setText(calc.getMedHun()+"ms");
 
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
-        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
-        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: " + buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
+        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() +
+                " Player Three: " + buzzerStats3.getPlayerThree());
+        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: "
+                + buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
     }
 
     @Override
@@ -207,12 +214,14 @@ public class Stats extends ActionBarActivity {
         myMedHunText.setText(calc.getMedHun()+"ms");
 
         twoPlayerStatsText.setText("Player One: " + buzzerStats2.getPlayerOne() + " Player Two: " + buzzerStats2.getPlayerTwo());
-        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " + buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
-        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: " + buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
+        threePlayerStatsText.setText("Player One: " + buzzerStats3.getPlayerOne() + " Player Two: " +
+                buzzerStats3.getPlayerTwo() + " Player Three: " + buzzerStats3.getPlayerThree());
+        fourPlayerStatsText.setText("Player One:    " + buzzerStats4.getPlayerOne() + " Player Two: " +
+                buzzerStats4.getPlayerTwo() + "\nPlayer Three: " + buzzerStats4.getPlayerThree() + " Player Four: " + buzzerStats4.getPlayerFour());
 
     }
 
-    //credit for loadInFile:
+    //credit for loadInFiles/saveInFiles:
     //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
     private void loadReactionStatsFromFile() {
         try {
@@ -302,8 +311,7 @@ public class Stats extends ActionBarActivity {
 
     }
 
-    //credit for saveInFile and loadFromFile
-    //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
+
     private void saveTwoPlayerInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME2, 0);

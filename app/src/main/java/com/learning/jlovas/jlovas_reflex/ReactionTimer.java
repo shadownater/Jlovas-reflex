@@ -75,8 +75,9 @@ public class ReactionTimer extends ActionBarActivity {
         setContentView(R.layout.activity_reaction_timer);
 
         //grab current time - credit to Nicole Lovas for informing me of this function
+
         //consulting with Nicole Lovas over implementation of random and use of countDownTimer
-        //Linda also mentioned using countDownTimer
+        //Linda Zhang also mentioned using countDownTimer
 
         //create object
         reactStat = new ReactStatClass();
@@ -115,14 +116,16 @@ public class ReactionTimer extends ActionBarActivity {
             saveInFile();
 
             //credit for restarting activity goes to:
+            //StackOverFlow:
             //EboMike, http://stackoverflow.com/questions/1397361/how-do-i-restart-an-android-activity, Sept 28, 2015
+            //http://stackoverflow.com/users/345717/ebomike
             Intent intent = getIntent();
             finish();
             startActivity(intent);
         }
 
     }
-    //credit for saveInFile
+    //credit for saveInFile/loadFromFile
     //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
     private void saveInFile() {
         try {
@@ -166,27 +169,27 @@ public class ReactionTimer extends ActionBarActivity {
     }
 
 
-//credit for CountDownTimer goes to:
-//http://androidbite.blogspot.ca/2012/11/android-count-down-timer-example.html, September 27, 2015
+    //credit for CountDownTimer goes to:
+    //AndroidBite, http://androidbite.blogspot.ca/2012/11/android-count-down-timer-example.html, September 27, 2015
 
-public class MyCountDownTimer extends CountDownTimer {
-    public MyCountDownTimer(long startTime, long interval) {
+    public class MyCountDownTimer extends CountDownTimer {
+        public MyCountDownTimer(long startTime, long interval) {
         super(startTime, interval);
     }
 
-    @Override
-    public void onFinish() {
-        //when random time is up I go here
-        background.setBackgroundColor(Color.RED);
-        reactStat.setTooFast(false);
-        }
+        @Override
+        public void onFinish() {
+            //when random time is up I go here
+            background.setBackgroundColor(Color.RED);
+            reactStat.setTooFast(false);
+            }
 
-    @Override
-    public void onTick(long millisUntilFinished) {
-        //don't need this, not showing any time stuff, but required to be here
-        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            //don't need this, not showing any time stuff, but required to be here
+            }
 
-    }
+        }
 
 
 }
