@@ -21,43 +21,48 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.learning.jlovas.jlovas_reflex.FourPlayers">
+    tools:context="com.learning.jlovas.jlovas_reflex.FourPlayers"
+    android:background="#7861ff">
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         android:text="Player One"
         android:id="@+id/p1Button4p"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:onClick="buttonPress4p"/>
+        android:onClick="buttonPress4p"
+        android:background="#FF95FFC9" />
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         android:text="Player Two"
         android:id="@+id/p2Button4p"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonPress4p"/>
+        android:onClick="buttonPress4p"
+        android:background="#95ffc9" />
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         android:text="Player Three"
         android:id="@+id/p3Button4p"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:onClick="buttonPress4p"/>
+        android:onClick="buttonPress4p"
+        android:background="#FF95FFC9" />
 
     <Button
         android:layout_width="160dp"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         android:text="Player Four"
         android:id="@+id/p4Button4p"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonPress4p"/>
+        android:onClick="buttonPress4p"
+        android:background="#FF95FFC9" />
 
 
 </RelativeLayout>

@@ -34,7 +34,8 @@
      android:layout_centerHorizontal="true"
      android:layout_alignParentBottom="true"
      android:layout_alignParentTop="true"
-     android:onClick="pushedButton"/>
+     android:onClick="pushedButton"
+     android:background="#ffe855" />
 
 </RelativeLayout>
 
