@@ -100,7 +100,7 @@ public class EmailStats extends ActionBarActivity {
         String message = new String("Reaction Timer Statistics:\nMax all: " + calc.getMaxAll() + "\nMax of last ten: " +calc.getMaxTen() +
                 "\nMax of last hundred: " + calc.getMaxHun() + "\nMin all: " + calc.getMinAll() + "\nMin of last ten: " +
                 calc.getMinTen() + "\nMin of last hundred: " + calc.getMinHun() + "\nAverage All: " +calc.getAvgAll() +
-                "\nAverage Ten: " + calc.getAvgTen() + "\nAverage of last hundred: " + calc.getAvgHun() + "\nMedian all: " +
+                "\nAverage Ten: " + calc.getAvgTen() + "\nAverage of last hundred: " + calc.getAvgHun() + "\nMedian all: " + calc.getMedAll() +
                 "\nMedian of last ten: " + calc.getMedTen() + "\nMedian of last hundred: " + calc.getMedHun() +
                 "\nGameshow Buzzer Statistics:\nTwo Player Mode:\nPlayer One: " + buzzerStats2.getPlayerOne() +
                 "\nPlayer Two: " +buzzerStats2.getPlayerTwo() + "\nThree Player Mode:\nPlayer One: " +buzzerStats3.getPlayerOne() +
