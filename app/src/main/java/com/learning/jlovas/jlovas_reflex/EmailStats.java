@@ -18,18 +18,183 @@
 
 package com.learning.jlovas.jlovas_reflex;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class EmailStats extends ActionBarActivity {
+
+    EditText enteredEmail;
+    String []myEmail;
+    String subject = new String("Your Buzzer statistics");
+
+    private static final String FILENAME = "calculatedStats.sav";
+    private static final String FILENAME2 = "twoPlayers.sav";
+    private static final String FILENAME3 = "threePlayers.sav";
+    private static final String FILENAME4 = "fourPlayers.sav";
+
+    TwoPlayerClass buzzerStats2 = new TwoPlayerClass();
+    ThreePlayerClass buzzerStats3 = new ThreePlayerClass();
+    FourPlayerClass buzzerStats4 = new FourPlayerClass();
+
+    CalculatorClass calc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_stats);
+
+        enteredEmail = (EditText)findViewById(R.id.emailText);
+        calc = new CalculatorClass();
+        buzzerStats2 = new TwoPlayerClass();
+        buzzerStats3 = new ThreePlayerClass();
+        buzzerStats4 = new FourPlayerClass();
+
+    }
+    //button to send your email!
+    public void emailStatsButton(View view){
+        //take the entered email and send email to it with all goods attached
+        myEmail = new String[]{enteredEmail.getText().toString()};
+            sendEmail(myEmail);
+        }
+
+    //this method is used to send the email
+    private void sendEmail(String []myEmail) {
+        //have to change the stats into strings so it can be sent
+        loadCalculatorFromFile();
+        loadTwoPlayerFromFile();
+        loadThreePlayerFromFile();
+        loadFourPlayerFromFile();
+
+        String message = new String("Reaction Timer Statistics:\nMax all: " + calc.getMaxAll() + "\nMax of last ten: " +calc.getMaxTen() +
+                "\nMax of last hundred: " + calc.getMaxHun() + "\nMin all: " + calc.getMinAll() + "\nMin of last ten: " +
+                calc.getMinTen() + "\nMin of last hundred: " + calc.getMinHun() + "\nAverage All: " +calc.getAvgAll() +
+                "\nAverage Ten: " + calc.getAvgTen() + "\nAverage of last hundred: " + calc.getAvgHun() + "\nMedian all: " +
+                "\nMedian of last ten: " + calc.getMedTen() + "\nMedian of last hundred: " + calc.getMedHun() +
+                "\nGameshow Buzzer Statistics:\nTwo Player Mode:\nPlayer One: " + buzzerStats2.getPlayerOne() +
+                "\nPlayer Two: " +buzzerStats2.getPlayerTwo() + "\nThree Player Mode:\nPlayer One: " +buzzerStats3.getPlayerOne() +
+                "\nPlayer Two: " + buzzerStats3.getPlayerTwo() + "\nPlayer Three: " +buzzerStats3.getPlayerThree() +
+                "\nFour Player Mode:\nPlayer One: " +buzzerStats4.getPlayerOne() + "\nPlayer Two: " + buzzerStats4.getPlayerTwo() +
+                "\nPlayer Three: " +buzzerStats4.getPlayerThree() + "\nPlayer Four: " + buzzerStats4.getPlayerFour());
+
+        //Credit for how to email:
+        //profgustin, https://www.youtube.com/watch?v=V1tAL0kjjuU, Oct 3rd, 2015
+        Intent sendTheEmail = new Intent(Intent.ACTION_SEND);
+        sendTheEmail.putExtra(Intent.EXTRA_EMAIL, myEmail);
+        sendTheEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+        sendTheEmail.putExtra(Intent.EXTRA_TEXT, message);
+        sendTheEmail.setType("message/rfc822");
+        startActivity(Intent.createChooser(sendTheEmail, "Email"));
+
     }
 
-    //I will do stuff... later! :D
+    //credit for loadInFile:
+    //UAlberta CMPUT 301, CMPUT 301 Lab Materials by Joshua Campbell, Sept 23, 2015
+    private void loadCalculatorFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<CalculatorClass>() {}.getType();
+            calc = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            calc = new CalculatorClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadTwoPlayerFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME2);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<TwoPlayerClass>() {}.getType();
+            buzzerStats2 = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerStats2 = new TwoPlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadThreePlayerFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME3);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<ThreePlayerClass>() {}.getType();
+            buzzerStats3 = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerStats3 = new ThreePlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadFourPlayerFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME4);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //credit for Gson:
+            //Google, https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            Type objectType = new TypeToken<FourPlayerClass>() {}.getType();
+            buzzerStats4 = gson.fromJson(in, objectType );
+            //have put the data into the reactStatArray
+            //or we make a new one if no data to load
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            buzzerStats4 = new FourPlayerClass();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

@@ -62,6 +62,7 @@ public class Stats extends ActionBarActivity {
     private static final String FILENAME2 = "twoPlayers.sav";
     private static final String FILENAME3 = "threePlayers.sav";
     private static final String FILENAME4 = "fourPlayers.sav";
+    private static final String FILENAME5 = "calculatedStats.sav";
     private ArrayList<ReactStatClass> reactStatArray = new ArrayList<ReactStatClass>();
     private CalculatorClass calc;
 
@@ -106,6 +107,9 @@ public class Stats extends ActionBarActivity {
         saveTwoPlayerInFile();
         saveThreePlayerInFile();
         saveFourPlayerInFile();
+
+        saveCalculatorInFile();
+
         //update text
 
         myMaxAllText.setText(calc.getMaxAll()+"ms");
@@ -179,6 +183,8 @@ public class Stats extends ActionBarActivity {
         calc.calcMedAll(reactStatArray);
         calc.calcMedTen(reactStatArray);
         calc.calcMedHun(reactStatArray);
+
+        saveCalculatorInFile();
 
         loadTwoPlayerFromFile();
         loadThreePlayerFromFile();
@@ -359,6 +365,24 @@ public class Stats extends ActionBarActivity {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(reactStatArray, out);
+            out.flush(); //to print what we did
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveCalculatorInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME5, 0);
+            //making container for Gson object
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(calc, out);
             out.flush(); //to print what we did
             fos.close();
         } catch (FileNotFoundException e) {
